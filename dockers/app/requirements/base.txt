@@ -1,0 +1,16 @@
+# Storage
+# ------------------------------------------------------------------------------
+SQLAlchemy==1.2.8
+minio==6.0.0
+mysql-connector-python
+
+# Celery
+# ------------------------------------------------------------------------------
+kombu
+kombu-sqlalchemy
+celery==4.4.2
+celery[redis]
+redis
+eventlet
+dnspython
+requests
