@@ -1,13 +1,14 @@
 # Storage
 # ------------------------------------------------------------------------------
 SQLAlchemy==1.2.8
-minio==6.0.0
 mysql-connector-python
+tweepy
 
 # Celery
 # ------------------------------------------------------------------------------
 kombu
 kombu-sqlalchemy
+simple-settings
 celery==4.4.2
 celery[redis]
 redis
