@@ -114,3 +114,5 @@ pip-selfcheck.json
 
 .envs/.main_envs
 cache
+
+*.txt

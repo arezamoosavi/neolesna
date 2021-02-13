@@ -23,7 +23,7 @@ twitter_json_mapping = {
     "user_id": lambda x: str(x["user"]["id"]),
     "name": lambda x: x["user"]["name"],
     "screen_name": lambda x: x["user"]["screen_name"],
-    "location": lambda x: x["user"]["location"],
+    "location": lambda x: x["user"]["location"] if x["user"]["location"] else "null",
     "description": lambda x: x["user"]["description"],
     "followers_count": lambda x: x["user"]["followers_count"],
     "friends_count": lambda x: x["user"]["friends_count"],

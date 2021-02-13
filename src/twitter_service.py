@@ -26,12 +26,20 @@ def get_twitter_api(settings):
 api = get_twitter_api(settings)
 
 if api:
-    new_search = "#wildfires" + " -filter:retweets"
-    tweets = tweepy.Cursor(api.search, q=new_search, lang="en").items(5)
+
+    new_search = "tesla -filter:retweets"
+    tweets = tweepy.Cursor(
+        api.search, q=new_search, result_type="mixed", include_entities=True, lang="en"
+    ).items(50)
+
+    file1 = open("res_data.txt", "w+")
 
     for tweet in tweets:
 
         data = {}
-        for key, f in settings.twitter_json_mapping.items():
-            data[key] = f(tweet._json)
-        print(data["source"], "\n\n\n", data["text"], "\n\n")
+        for key, func in settings.twitter_json_mapping.items():
+            data[key] = func(tweet._json)
+        file1.write(
+            f'{data["name"]} - {data["source"]} - {data["location"]} - {data["text"]} \n\n'
+        )
+    file1.close()
