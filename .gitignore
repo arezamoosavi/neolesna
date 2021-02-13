@@ -110,3 +110,6 @@ pip-selfcheck.json
 .ipynb_checkpoints/
 
 .vscode
+
+
+.envs/.main_envs
