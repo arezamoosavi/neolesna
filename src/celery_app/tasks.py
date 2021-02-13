@@ -20,3 +20,4 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | {%(pathname)s:%(lineno)d} | %(module)s | %(levelname)s | %(funcName)s | %(message)s"
 )
+

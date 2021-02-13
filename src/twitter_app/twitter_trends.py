@@ -28,19 +28,8 @@ api = get_twitter_api(settings)
 if api:
 
     print("connected Ok!")
+    data = api.trends_place(1, "#")
+    trends = data[0]["trends"]
+    trend_names = "\n".join(trend["name"] for trend in trends)
 
-    new_search = "iran -filter:retweets"
-    tweets = tweepy.Cursor(
-        api.search, q=new_search, result_type="recent", include_entities=True, lang="en"
-    ).items(50)
-
-    file1 = open("res_data.txt", "w+")
-
-    for tweet in tweets:
-        print("new tweet!")
-        data = {}
-        for key, func in settings.twitter_json_mapping.items():
-            data[key] = func(tweet._json)
-
-        file1.write(f'{data["source"]} - {data["name"]} - {data["text"]} \n\n')
-    file1.close()
+    print(trend_names)
