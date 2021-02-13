@@ -41,5 +41,6 @@ if api:
         data = {}
         for key, func in settings.twitter_json_mapping.items():
             data[key] = func(tweet._json)
-        file1.write(f'{data["name"]} - {data["location"]} - {data["text"]} \n\n')
+
+        file1.write(f'{data["source"]} - {data["name"]} - {data["text"]} \n\n')
     file1.close()

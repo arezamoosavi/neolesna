@@ -1,9 +1,8 @@
 # Storage
 # ------------------------------------------------------------------------------
 SQLAlchemy==1.2.8
-mysql-connector-python
-tweepy
-nltk
+mysql-connector-python==8.0.23
+tweepy==3.10.0
 
 # Celery
 # ------------------------------------------------------------------------------
@@ -12,6 +11,7 @@ kombu-sqlalchemy
 simple-settings
 celery==4.4.2
 celery[redis]
+celery[eventlet]
 redis
 eventlet
 dnspython
