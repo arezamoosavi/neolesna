@@ -9,7 +9,7 @@ RUN apt-get update -y && apt-get install -y libzbar-dev bash gcc git libc-dev cu
     && apt-get clean
 
 #Project
-RUN apt-get update && apt-get install -y libgl1-mesa-glx 'ffmpeg' 'libsm6' 'libxext6'
+RUN apt-get update && apt-get install -y default-libmysqlclient-dev
 
 RUN pip install --upgrade pip
 
