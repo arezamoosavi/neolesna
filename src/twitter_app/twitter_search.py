@@ -1,10 +1,8 @@
 # Twitter API authentication
 
 import tweepy
-import json
 import settings
-from sqlalchemy.sql import text
-from db.models import engine
+from models import insert_json_data
 
 
 def get_twitter_api(settings):
@@ -37,15 +35,16 @@ if api:
     ).items(50)
 
     file1 = open("res_data.txt", "w+")
-    with engine.connect() as con:
-        for tweet in tweets:
+    for tweet in tweets:
 
-            if tweet._json.get("id", None) is None:
-                continue
+        if tweet._json.get("id", None) is None:
+            continue
 
-            data = {}
-            for key, func in settings.twitter_json_mapping.items():
-                data[key] = func(tweet._json)
+        data = {}
+        for key, func in settings.twitter_json_mapping.items():
+            data[key] = func(tweet._json)
 
-            file1.write(f'{data["source"]} - {data["name"]} - {data["text"]} \n\n')
+        data["keyword"] = "iran"
+        insert_json_data(data, "tweets")
+        file1.write(f'{data["source"]} - {data["name"]} - {data["text"]} \n\n')
     file1.close()

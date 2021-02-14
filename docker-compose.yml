@@ -39,6 +39,8 @@ services:
       - ./cache/redis:/data
   mysql:
     image: mysql:8.0
+    ports:
+    - "3306:3306"
     expose:
       - "3306"
       - "33060"

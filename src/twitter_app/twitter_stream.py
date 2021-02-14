@@ -3,7 +3,9 @@ import settings
 
 import tweepy
 from tweepy.streaming import StreamListener
+from models import insert_json_data
 
+key_words = ["trump", "iran"]
 
 def get_twitter_api(settings):
     # authorize the API Key
@@ -28,8 +30,6 @@ api = get_twitter_api(settings)
 
 class MyStreamListener(StreamListener):
     def on_data(self, tweet):
-        file1 = open("res_data.txt", "a+")
-
         tweet = json.loads(tweet)
         if tweet.get("id", None) is None:
             return None
@@ -37,9 +37,9 @@ class MyStreamListener(StreamListener):
         data = {}
         for key, func in settings.twitter_json_mapping.items():
             data[key] = func(tweet)
-        file1.write(f'\n\n {data["source"]} -\n {data["name"]} -\n {data["text"]}\n\n')
-        file1.close()
 
+        data["keyword"] = ", ".join(key_words)
+        insert_json_data(data, "tweets")
         return True
 
     def on_error(self, status):
@@ -61,4 +61,4 @@ if api:
     myStream = tweepy.Stream(
         auth=api.auth, listener=myStreamListener, tweet_mode="extended"
     )
-    myStream.filter(languages=["en"], track=["trump", "biden"], is_async=True)
+    myStream.filter(languages=["en"], track=key_words, is_async=True)
