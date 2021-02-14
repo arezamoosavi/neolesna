@@ -5,7 +5,7 @@ import tweepy
 from tweepy.streaming import StreamListener
 from models import insert_json_data
 
-key_words = ["trump", "iran"]
+key_words = ["human", "rights"]
 
 def get_twitter_api(settings):
     # authorize the API Key
@@ -39,7 +39,11 @@ class MyStreamListener(StreamListener):
             data[key] = func(tweet)
 
         data["keyword"] = ", ".join(key_words)
-        insert_json_data(data, "tweets")
+        try:
+            insert_json_data(data, "tweets")
+        except Exception as e:
+            print(str(e), "\n\n", data, "\n\n")
+            return True
         return True
 
     def on_error(self, status):
